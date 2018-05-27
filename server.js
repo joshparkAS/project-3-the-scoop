@@ -169,7 +169,7 @@ function upvoteComment(url, request) {
   let savedComment = database.comments[id];
   const response = {};
 
-  if (database.users[username] && savedComment) {
+  if (database.users[username] && savedComment && username) {
     savedComment = upvote(savedComment, username);
 
     response.body = {comment: savedComment};
@@ -189,14 +189,14 @@ function downvoteComment(url, request) {
   let savedComment = database.comments[id];
   const response = {};
 
-  if (database.users[username] && savedComment) {
+  if (database.users[username] && savedComment && username) {
     savedComment = downvote(savedComment, username);
 
     response.body = {comment: savedComment};
     response.status = 200;
 
   } else {
-    response.status = 200;
+    response.status = 400;
   }
   return response;
 }
